@@ -6,12 +6,16 @@ metody do ni dat, nebo proste jenom
 metody bez tridy.
 """
 
-"""
-Rozparsuje vstupni soubor
-"""
-def parse(file)
+class parser:
 
-"""
-Vraci hodnotu vlastnosti zadane atributem
-"""
-def getPropertyValue(name)
+	config = ConfigParser.RawConfigParser()
+
+	def parse(self,file):
+		config = self.config.read(file)
+		
+	def getPropertyValue(self,section,name):
+		var = self.config.get(section,name)
+		return var
+
+  
+#end of class parser
