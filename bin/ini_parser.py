@@ -1,16 +1,37 @@
-import ConfigParser #tohle je modul s funkcemi pro praci s ini, cfg, ... soubory
 
+import ConfigParser 
 
 class parser:
 
-	config = ConfigParser.RawConfigParser()
+	config = ConfigParser.ConfigParser()
 
 	def parse(self,file):
 		config = self.config.read(file)
 		
-	def getPropertyValue(self,section,name):
-		var = self.config.get(section,name)
-		return var
+	def getPropertyValue(self, section, name):
+		return self.config.get(section,name)
+		
+	def getValueAsInt(self, section, name):
+		return self.config.getint(section,name)
+		
+	def getValueAsFloat(self, section, name):
+		return self.config.getfloat(section,name)
+		
+	def getValueAsBoolean():
+		return self.config.getboolean(section,name)
+		
+	def loadConfiguration(self, filepath, requiredconfig):
+		config = self.config.read(filepath)
+		k = requiredconfig.keys()
+		section = k[0]
+		sec_exists = self.config.has_section(section)
+		if sec_exists == False:
+			raise ConfigParser.NoSectionError
+		
+		for names in requiredconfig[section]:			
+			name_exists = self.config.has_option(section,names)			
+			if name_exists == False:
+				raise ConfigParser.NoOptionError(names,section)
 
-  
+
 #end of class parser
