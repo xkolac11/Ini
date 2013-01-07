@@ -17,21 +17,22 @@ class parser:
 	def getValueAsFloat(self, section, name):
 		return self.config.getfloat(section,name)
 		
-	def getValueAsBoolean():
+	def getValueAsBoolean(self, section, name):
 		return self.config.getboolean(section,name)
 		
 	def loadConfiguration(self, filepath, requiredconfig):
 		config = self.config.read(filepath)
 		k = requiredconfig.keys()
-		section = k[0]
-		sec_exists = self.config.has_section(section)
-		if sec_exists == False:
-			raise ConfigParser.NoSectionError
 		
-		for names in requiredconfig[section]:			
-			name_exists = self.config.has_option(section,names)			
-			if name_exists == False:
-				raise ConfigParser.NoOptionError(names,section)
-
+		for section in k:
+			sec_exists = self.config.has_section(section)
+			if sec_exists == False:
+				raise ConfigParser.NoSectionError
+			
+			for names in requiredconfig[section]:
+				name_exists = self.config.has_option(section,names)
+				if name_exists == False:
+					raise ConfigParser.NoOptionError(names,section)
+		
 
 #end of class parser

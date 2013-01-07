@@ -4,7 +4,7 @@ file = "test.ini"
 section = "Files"
 name = "two"
 
-required = {'Files':['one', 'two']}
+required = {'Files':['one', 'two'],'Item':['user']}
 
 #testovani
 obj = ini_parser.parser()
